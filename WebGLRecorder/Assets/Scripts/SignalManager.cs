@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -35,43 +35,43 @@ public class SignalManager : MonoBehaviour
     #region JsToUnity
     #region Data
     /// <summary>
-    ///Ğè»ñÈ¡Êı¾İµÄÊıÄ¿
+    ///éœ€è·å–æ•°æ®çš„æ•°ç›®
     /// </summary>
     private int m_valuePartCount = 0;
     /// <summary>
-    /// »ñÈ¡µÄÊı¾İÊıÄ¿
+    /// è·å–çš„æ•°æ®æ•°ç›®
     /// </summary>
     private int m_getDataLength = 0;
     /// <summary>
-    /// »ñÈ¡µÄÊı¾İ³¤¶È
+    /// è·å–çš„æ•°æ®é•¿åº¦
     /// </summary>
     private int m_audioLength = 0;
     /// <summary>
-    /// »ñÈ¡µÄÊı¾İ
+    /// è·å–çš„æ•°æ®
     /// </summary>
     private string[] m_audioData = null;
 
     /// <summary>
-    /// µ±Ç°ÒôÆµ
+    /// å½“å‰éŸ³é¢‘
     /// </summary>
     public static AudioClip m_audioClip = null;
 
     /// <summary>
-    /// ÒôÆµÆ¬¶Î´æ·ÅÁĞ±í
+    /// éŸ³é¢‘ç‰‡æ®µå­˜æ”¾åˆ—è¡¨
     /// </summary>
     private List<byte[]> m_audioClipDataList;
 
     /// <summary>
-    /// Æ¬¶Î½áÊø±ê¼Ç
+    /// ç‰‡æ®µç»“æŸæ ‡è®°
     /// </summary>
     private string m_currentRecorderSign;
     /// <summary>
-    /// ÒôÆµÆµÂÊ
+    /// éŸ³é¢‘é¢‘ç‡
     /// </summary>
     private int m_audioFrequency;
 
     /// <summary>
-    /// µ¥´Î×î´óÂ¼ÖÆÊ±¼ä
+    /// å•æ¬¡æœ€å¤§å½•åˆ¶æ—¶é—´
     /// </summary>
     private const int maxRecordTime = 30;
     #endregion
@@ -86,7 +86,7 @@ public class SignalManager : MonoBehaviour
             m_currentRecorderSign = _headValue[3];
             m_audioData = new string[m_valuePartCount];
             m_getDataLength = 0;
-            Debug.Log("½ÓÊÕÊı¾İÍ·£º" + m_valuePartCount + "   " + m_audioLength);
+            Debug.Log("æ¥æ”¶æ•°æ®å¤´ï¼š" + m_valuePartCount + "   " + m_audioLength);
         }
         else if (_audioDataString.Contains("Part"))
         {
@@ -102,11 +102,11 @@ public class SignalManager : MonoBehaviour
                     stringBuilder.Append(m_audioData[i]);
                 }
                 string _audioDataValue = stringBuilder.ToString();
-                Debug.Log("½ÓÊÕ³¤¶È:" + _audioDataValue.Length + " Ğè½ÓÊÕ³¤¶È:" + m_audioLength);
+                Debug.Log("æ¥æ”¶é•¿åº¦:" + _audioDataValue.Length + " éœ€æ¥æ”¶é•¿åº¦:" + m_audioLength);
                 int _index = _audioDataValue.LastIndexOf(',');
                 string _value = _audioDataValue.Substring(_index + 1, _audioDataValue.Length - _index - 1);
                 byte[] data = Convert.FromBase64String(_value);
-                Debug.Log("ÒÑ½ÓÊÕ³¤¶È :" + data.Length);
+                Debug.Log("å·²æ¥æ”¶é•¿åº¦ :" + data.Length);
 
                 if (m_currentRecorderSign == "end")
                 {
@@ -116,16 +116,16 @@ public class SignalManager : MonoBehaviour
                         _audioLength += m_audioClipDataList[i].Length;
                     }
                     byte[] _audioData = new byte[_audioLength];
-                    Debug.Log("×Ü³¤¶È :" + _audioLength);
+                    Debug.Log("æ€»é•¿åº¦ :" + _audioLength);
                     int _audioIndex = 0;
                     data.CopyTo(_audioData, _audioIndex);
                     _audioIndex += data.Length;
-                    Debug.Log("ÒÑ¸³Öµ0:" + _audioIndex);
+                    Debug.Log("å·²èµ‹å€¼0:" + _audioIndex);
                     for (int i = 0; i < m_audioClipDataList.Count; i++)
                     {
                         m_audioClipDataList[i].CopyTo(_audioData, _audioIndex);
                         _audioIndex += m_audioClipDataList[i].Length;
-                        Debug.Log("ÒÑ¸³Öµ :" + _audioIndex);
+                        Debug.Log("å·²èµ‹å€¼ :" + _audioIndex);
                     }
 
                     WAV wav = new WAV(_audioData);
@@ -133,7 +133,7 @@ public class SignalManager : MonoBehaviour
                     _audioClip.SetData(wav.LeftChannel, 0);
 
                     m_audioClip = _audioClip;
-                    Debug.Log("ÒôÆµÉèÖÃ³É¹¦,ÒÑÉèÖÃµ½unity¡£" + m_audioClip.length + "  " + m_audioClip.name);
+                    Debug.Log("éŸ³é¢‘è®¾ç½®æˆåŠŸ,å·²è®¾ç½®åˆ°unityã€‚" + m_audioClip.length + "  " + m_audioClip.name);
 
                     m_audioSource.clip = m_audioClip;
                     m_audioSource.Play();
