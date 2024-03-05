@@ -1,0 +1,11 @@
+.idea
+.vs
+.vsconfig
+*.csproj
+Library
+Logs
+obj
+*.sln
+*.xmind
+Temp
+StreamingAssets

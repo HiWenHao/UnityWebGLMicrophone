@@ -140,8 +140,6 @@ public class SignalManager : MonoBehaviour
 
                     m_audioClipDataList.Clear();
                 }
-                else
-                    m_audioClipDataList.Add(data);
 
                 m_audioData = null;
             }
